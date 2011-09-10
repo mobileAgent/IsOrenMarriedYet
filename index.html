@@ -1,0 +1,87 @@
+<!DOCTYPE html>  
+<html lang="en">
+  <head>
+    <title>Is Oren Married Yet?</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style/fireworks.css" media="screen" />
+    <script type="text/javascript" src="script/soundmanager2-nodebug-jsmin.js"></script>
+    <script type="text/javascript" src="script/fireworks.js"></script>
+    <!-- oren means pine tree -->
+    <link rel="shortcut icon" href="oren.ico" type="image/x-icon"/>
+    <style>
+      body { text-align: center; padding-top: 200px; }
+      h1 {font-weight: bold; font-size: 120pt; font-family: Arial, sans-serif}
+      h2 {font-weight: bold; font-size:  20pt; font-family: Arial, sans-serif}
+     </style>
+  </head>
+  <body id='body'>
+    <h1 id='msg'>No.</h1>
+    <h2 id='tl'></h2>
+<div id="fireworks-template">
+ <div id="fw" class="firework"></div>
+ <div id="fp" class="fireworkParticle"><img src="image/particles.gif" alt="" /></div>
+</div>
+
+<div id="fireContainer"></div>
+
+  </body>
+  <script type="text/javascript">
+    var fw = 0;
+    var sz = 120;
+    var dir = 0;
+    function killer_queen()
+    {
+       ++fw;
+       if (fw < 50)
+       {
+          var fg = color();
+          var bg = fw > 20 ? color() : "white";
+          flash(document.getElementById('body'),fg,bg);
+          setTimeout(killer_queen,50);
+       }
+       else if (fw < 100)
+       {
+          flash(document.getElementById('body'),"black","white");
+          createFirework(25,187,5,1,null,null,null,null,Math.random()>0.5,true);
+          setTimeout(killer_queen,1+parseInt(Math.random()*1000));
+       }
+    }
+    function color()
+    {
+       var r=Math.floor(Math.random() * 255).toString(16);
+       var g=Math.floor(Math.random() * 255).toString(16);
+       var b=Math.floor(Math.random() * 255).toString(16);
+       return "#" + r + g + b;
+    }
+    function flash(el,fg,bg)
+    {
+       el.style.backgroundColor = bg;
+       el.style.color = fg;
+    }
+    var now = new Date();
+    var h = [
+       new Date("September 10, 2011, 17:30:00 EDT"),
+       new Date("September 10, 2011, 17:00:01 EDT"),
+       new Date("September 10, 2011, 00:00:01 EDT")
+    ];
+    var m = ['Yes!','No.','No.'];
+    var tl = [
+        '',
+        'But the <a href="http://en.wikipedia.org/wiki/Ketubah">Ketuba</a> has been signed.',
+        'Today is the day.'
+    ];
+    for (var i=0; i<h.length; i++)
+    {
+      if (now > h[i])
+      {
+         document.getElementById('msg').innerHTML = m[i];
+         document.getElementById('tl').innerHTML = tl[i];
+         if (i == 0)
+         {
+           killer_queen();
+         }
+         break;
+      }
+    }
+  </script>
+</html>
